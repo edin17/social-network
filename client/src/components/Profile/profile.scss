@@ -1,0 +1,83 @@
+.profile{
+    margin-top: 10vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+@mixin btnStyle{
+    width: 40%;
+    height: 32px;
+    border: none;
+    border-radius: 5px;
+    margin-top: 20px;
+    margin-left: 50%;
+}
+.profile-header{
+    width: 100vw;
+    height: 30vh;
+    display: flex;
+    justify-content: center;
+    border-bottom: 1px solid rgb(221, 220, 220);
+    flex-direction: column;
+    #follow-btn{
+        @include btnStyle();
+        background-color: royalblue;
+        color: white;
+    }
+    #unfollow-btn{
+        @include btnStyle();
+        background-color: white;
+        color: black;
+    }
+    .profile-info{
+        width: 100vw;
+        height: 50%;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        align-self: center;
+        span{
+            img{
+                width: 100px;
+                height: 100px;
+                border-radius: 50%;
+            }
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: center;
+            width: 50%;
+        }
+        #main{
+            justify-content: unset;
+            width: 20%;
+        }
+    }
+}
+.profile .image-container{
+    margin: auto;
+    width: 50vw;
+    display: grid;
+    gap: 5px;
+    grid-template-columns: 1fr 1fr 1fr;
+    
+    img{
+        width: 100%;
+        height: 200px;
+    }
+}
+
+@media(max-width:768px){
+    .profile-header{
+        .profile-info{
+            justify-content: space-between;
+        }
+    }
+    .profile .image-container{
+        width: 100vw;
+        grid-template-columns: 1fr 1fr 1fr;
+        img{
+            height: 150px;
+        }
+    }
+  
+}

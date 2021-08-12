@@ -1,0 +1,117 @@
+.profile {
+  margin-top: 10vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.profile-header {
+  width: 100vw;
+  height: 30vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  border-bottom: 1px solid #dddcdc;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.profile-header #follow-btn {
+  width: 40%;
+  height: 32px;
+  border: none;
+  border-radius: 5px;
+  margin-top: 20px;
+  margin-left: 50%;
+  background-color: royalblue;
+  color: white;
+}
+
+.profile-header #unfollow-btn {
+  width: 40%;
+  height: 32px;
+  border: none;
+  border-radius: 5px;
+  margin-top: 20px;
+  margin-left: 50%;
+  background-color: white;
+  color: black;
+}
+
+.profile-header .profile-info {
+  width: 100vw;
+  height: 50%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-item-align: center;
+      align-self: center;
+}
+
+.profile-header .profile-info span {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  text-align: center;
+  width: 50%;
+}
+
+.profile-header .profile-info span img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+
+.profile-header .profile-info #main {
+  -webkit-box-pack: unset;
+      -ms-flex-pack: unset;
+          justify-content: unset;
+  width: 20%;
+}
+
+.profile .image-container {
+  margin: auto;
+  width: 50vw;
+  display: -ms-grid;
+  display: grid;
+  gap: 5px;
+  -ms-grid-columns: 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr;
+}
+
+.profile .image-container img {
+  width: 100%;
+  height: 200px;
+}
+
+@media (max-width: 768px) {
+  .profile-header .profile-info {
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+  }
+  .profile .image-container {
+    width: 100vw;
+    -ms-grid-columns: 1fr 1fr 1fr;
+        grid-template-columns: 1fr 1fr 1fr;
+  }
+  .profile .image-container img {
+    height: 150px;
+  }
+}
+/*# sourceMappingURL=profile.css.map */

@@ -1,0 +1,69 @@
+.search {
+  height: 80vh;
+  width: 100vw;
+  position: absolute;
+  top: 10vh;
+  height: 100vh;
+  background-color: white;
+}
+
+.search svg {
+  float: right;
+}
+
+.search .single-user {
+  width: 100%;
+  height: 50px;
+  border-top: 1px solid #cfcfcf;
+  border-bottom: 1px solid #cfcfcf;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.search .single-user #follow-btn {
+  width: 20%;
+  height: 32px;
+  border: none;
+  border-radius: 5px;
+  margin-right: 10px;
+  background-color: royalblue;
+  color: white;
+}
+
+.search .single-user #unfollow-btn {
+  width: 20%;
+  height: 32px;
+  border: none;
+  border-radius: 5px;
+  margin-right: 10px;
+  background-color: white;
+  border: 1px solid #dbdbdb;
+  color: black;
+}
+
+.search .single-user span {
+  margin-left: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.search .single-user span img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
+/*# sourceMappingURL=search.css.map */

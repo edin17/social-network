@@ -1,0 +1,32 @@
+$borderColor:rgb(219, 219, 219);
+
+header{
+    width: 100vw;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-bottom-left-radius:20px;
+    border-bottom-right-radius:20px ;
+    background-color: royalblue;
+    height: 10vh;
+    position: fixed;
+    top:0;
+
+    h1{
+        width: 30vw;
+        color: white;
+        cursor: pointer;
+    }
+    input{
+        width: 30vw;
+        height: 24px;
+        border: 1px solid $borderColor;
+        border-radius: 5px;
+    }
+    svg{
+        width: 10vw;
+        color: white;
+        cursor: pointer;
+    }
+
+}

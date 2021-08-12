@@ -1,0 +1,23 @@
+footer{
+    width: 100vw;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-top-right-radius:20px;
+    border-top-left-radius:20px;
+    background-color: royalblue;
+    height: 10vh;
+    position: fixed;
+    bottom: 0;
+    img{
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        cursor: pointer;
+    }
+    svg{
+        color: white;
+        cursor: pointer;
+    }
+
+}

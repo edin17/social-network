@@ -1,0 +1,176 @@
+.post {
+  width: 400px;
+  height: 500px;
+  border-radius: 20px;
+  border: 1px solid #e2e2e2;
+  margin: 0 auto;
+  margin-top: 1vh;
+  text-align: center;
+  overflow: hidden;
+}
+
+.post .post-header {
+  border-bottom: #e2e2e2;
+  height: 10%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  border-bottom: 1px solid #e2e2e2;
+}
+
+.post .post-header span {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 30%;
+  height: 32px;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin: 0;
+}
+
+.post .post-header span h3 {
+  margin: 0;
+}
+
+.post .post-header span img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  margin: 0;
+}
+
+.post .image-container {
+  width: 100%;
+  background-color: gray;
+}
+
+.post .image-container img {
+  max-width: 100%;
+  width: auto;
+  max-height: 300px;
+  height: auto;
+}
+
+.post .reactions {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 10%;
+  width: 100%;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  border-bottom: 1px solid #e2e2e2;
+}
+
+.post .reactions span {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 50%;
+  height: 100%;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  margin-left: 25%;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.post .comment {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.post .comment textarea {
+  width: 80%;
+  height: 4vh;
+  border: 1px solid #e2e2e2;
+}
+
+.post .comment button {
+  width: 20%;
+  height: 5vh;
+  border: none;
+  color: white;
+  background-color: royalblue;
+}
+
+.post .post-comments, .post .all-comments {
+  width: 100%;
+  height: 32px;
+}
+
+.post .post-comments .single-comment, .post .all-comments .single-comment {
+  width: 100%;
+  height: 32px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-left: 10px;
+  text-align: left;
+  margin-top: 20px;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+.post .post-comments .single-comment span, .post .all-comments .single-comment span {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.post .post-comments .single-comment span img, .post .all-comments .single-comment span img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
+
+.post .post-comments .single-comment span p, .post .all-comments .single-comment span p {
+  height: 20px;
+}
+
+.post .post-comments .single-comment span h3, .post .all-comments .single-comment span h3 {
+  height: 32px;
+  font-size: 32px;
+}
+
+.post .post-comments .last-comment, .post .all-comments .last-comment {
+  -webkit-box-pack: unset;
+      -ms-flex-pack: unset;
+          justify-content: unset;
+}
+
+.post .all-comments {
+  height: 100%;
+  z-index: 4;
+}
+
+@media (max-width: 478px) {
+  .post {
+    border: none;
+    width: 100vw;
+    border-top: 1px solid #e2e2e2;
+  }
+}
+/*# sourceMappingURL=post.css.map */
