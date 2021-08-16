@@ -5,6 +5,9 @@ import Register from "./components/Register/register";
 import Home from './components/Home.js/home';
 import NewPost from './components/NewPost/NewPost';
 import Profile from "./components/Profile/profile";
+import Redirekt from "./components/Redirect/redirect";
+import Notifications from './components/Notifications/notifications';
+import ViewPost from './components/ViewPost/ViewPost';
 
 
 function App() {
@@ -16,6 +19,9 @@ function App() {
         <Route path="/newpost" exact component={NewPost}/>
         <Route path="/home" component={Home}/>
         <Route path="/profile/:id" component={Profile}/>
+        <Route path="/post/:id" component={ViewPost}/>
+        <Route path="/notifications" component={Notifications}/>
+        <Route path="/" exact component={Redirekt}/>
 
       </Router>
     </div>

@@ -48,7 +48,12 @@ const userSchema=mongoose.Schema({
     profilePhoto:{
         type:String,
         default:"/profile.jpg"
-    }
+    },
+    notifications:{
+        type:Array,
+        default:[]
+    },
+
 })
 
 const User = mongoose.model("User",userSchema);

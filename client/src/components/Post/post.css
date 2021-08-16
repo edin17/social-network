@@ -1,6 +1,6 @@
 .post {
   width: 400px;
-  height: 500px;
+  height: 530px;
   border-radius: 20px;
   border: 1px solid #e2e2e2;
   margin: 0 auto;
@@ -171,6 +171,10 @@
     border: none;
     width: 100vw;
     border-top: 1px solid #e2e2e2;
+  }
+  .post .all-comments {
+    position: fixed;
+    background-color: white;
   }
 }
 /*# sourceMappingURL=post.css.map */

@@ -39,6 +39,11 @@
   color: white;
 }
 
+.login .form p {
+  color: white;
+  cursor: pointer;
+}
+
 .login .form span {
   width: 100%;
 }

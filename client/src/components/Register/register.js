@@ -53,6 +53,7 @@ export default function Login(){
 
             <input className="btn" type="submit"/>
             <p id="login-alert" style={alertStyle}>{alert}</p>
+            <p onClick={()=>window.location="/login"}>If you have acc, <u>login</u></p>
         </form>
     </div>
 }

@@ -30,6 +30,7 @@ export default function Home(){
 
     return <div className="home">
         <Header/>
+        {posts.length<=0 ? <p>Please go search and follow someone to see his posts!</p>:""}
         {posts.map(post=>{
             return <Post post={post} user={localUserInfo} dispatch={dispatch}/>
         })}

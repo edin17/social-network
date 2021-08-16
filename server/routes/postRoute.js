@@ -1,7 +1,27 @@
 const express=require("express");
 const post=express();
 const Post=require("../models/Post");
+const User=require("../models/User");
 const multer=require("multer");
+
+
+async function sendNotification(postFound,userid,action){
+  const notifyUser=JSON.parse(postFound.user);
+  console.log(notifyUser)
+  let user=await User.findOne({_id:notifyUser._id});
+  let likeUser=await User.findOne({_id:userid})
+  let id=user.username+likeUser.username+postFound._id+action;
+  if(!user.notifications.find(notfy=>notfy.id===id)){
+  user.notifications.push({
+    id:id,
+    post:postFound,
+    likeUser:likeUser,
+    action:action
+  })
+  user.save();
+}
+}
+
 
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -25,9 +45,13 @@ var storage = multer.diskStorage({
 
 
 
-post.post("/uploadpost",upload.single("file"),(req,res)=>{
+post.post("/uploadpost",upload.single("file"),async(req,res)=>{
     const fileInfo=req.body;
-    
+
+    let user=JSON.parse(fileInfo.user);
+    let userDB=await User.findOne({_id:user._id});
+    userDB.posts.push(fileInfo);
+    userDB.save();
 
     const newPost=new Post(fileInfo);
 
@@ -38,6 +62,14 @@ post.post("/uploadpost",upload.single("file"),(req,res)=>{
         post.status(400).send("Invalid file upload.");
     }
 });
+
+post.put("/deletepost",async(req,res)=>{
+  const fileID=req.body.postid;
+  console.log(fileID)
+  await Post.deleteOne({_id:fileID});
+
+
+})
 
 post.post("/getposts",async(req,res)=>{
   const user=req.body.user;
@@ -60,6 +92,8 @@ post.put("/postcomment",async(req,res)=>{
     if(postFound){
       postFound.comments.push(comment);
       postFound.save();
+      let action="comment on your photo"
+      sendNotification(postFound,comment.userid,action)
     }else{
       console.log("Post does not exist.")
     }
@@ -78,11 +112,14 @@ post.put("/deletecomment",async(req,res)=>{
 
 post.put("/like",async(req)=>{
   let likeInfo=req.body;
+  let action="liked your photo";
   console.log(likeInfo)
   let postFound=await Post.findOne({_id:likeInfo.postid});
   await postFound.update({$push:{likes:[likeInfo.userid]}});
   postFound.save();
-  console.log("like")
+
+  sendNotification(postFound,likeInfo.userid,action);
+ 
 
 })
 
@@ -95,6 +132,18 @@ post.put("/unlike",async(req)=>{
     console.log("unlike")
 
 })
+
+post.post("/getpost",async(req,res)=>{
+  let postid=req.body.postid;
+  let photo=await Post.findOne({_id:postid});
+  if(photo){
+    res.send(photo)
+  }else{
+    res.send("Nistaa")
+  }
+})
+
+
 
 
 module.exports=post;

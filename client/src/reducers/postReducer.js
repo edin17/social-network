@@ -1,6 +1,9 @@
 
 export default function postReducer(state=[],action){
     switch(action.type){
+        case "LOADPOST":
+            state=action.payload;
+            return state;
         case "LOAD":
             state=action.payload;
             return state;
@@ -15,14 +18,20 @@ export default function postReducer(state=[],action){
             return state;
 
         case "LIKE":
-            let likedPost=state.find(photo=>photo._id===action.payload.postid);
-            likedPost.likes.push(action.payload.userid);
-            return state;
+
+                let likedPost=state.find(photo=>photo._id===action.payload.postid);
+                likedPost.likes.push(action.payload.userid);
+                return state;
+            
+
         case "UNLIKE":
-            let unlikedPost=state.find(photo=>photo._id===action.payload.postid);
-            let likes=unlikedPost.likes.filter(like=>like!==action.payload.userid);
-            unlikedPost.likes=likes;
-            return state;
+
+                let unlikedPost=state.find(photo=>photo._id===action.payload.postid);
+                let likes=unlikedPost.likes.filter(like=>like!==action.payload.userid);
+                unlikedPost.likes=likes;
+                return state;
+            
+
         default:
             return state;
     }

@@ -6,7 +6,6 @@ const jwt=require("jsonwebtoken");
 const user=express.Router();
 
 
-
 user.post("/register",async(req,res)=>{
     const user=req.body;
     const hashPassword=await bcrypt.hash(user.password,10);
@@ -94,6 +93,12 @@ user.post("/search",async(req,res)=>{
 
     const users=await User.find({username:{$regex:searched}}).limit(100);
     res.send(users);
+})
+user.post("/getnotifications",async(req,res)=>{
+    let userid=req.body.userid;
+
+    let userFound=await User.findOne({_id:userid});
+    res.send(userFound.notifications);
 })
 
 module.exports=user;

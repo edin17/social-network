@@ -1,5 +1,5 @@
 import "./post.css";
-import {AiOutlineHeart,AiOutlineSend} from "react-icons/ai";
+import { AiOutlineHeart} from "react-icons/ai";
 import {FaRegCommentAlt} from "react-icons/fa";
 import {IoMdClose} from "react-icons/io";
 import {useState} from "react";
@@ -7,15 +7,17 @@ import axios from "axios";
 import {useSpring,animated} from "react-spring";
 import {useSelector} from "react-redux";
 
+
+
 export default function Post({post,user,dispatch}){
 
-    const userPhoto=JSON.parse(post.user);
-    console.log(userPhoto);
-
-    
-    
-
+    const [commentToggle,setCommentToggle]=useState(false)
+    const commentsStyle=useSpring(commentToggle ? {display:"block"}:{display:"none"});
+    const [likeTrigger,setLikeTrigger]=useState(false);
     const [comment,setComment]=useState();
+    
+    let updatedPosts=useSelector(store=>store.posts)
+
     function postComment(){
         if(typeof(comment)==="string" && comment.length>0){
             let commObj={
@@ -32,14 +34,13 @@ export default function Post({post,user,dispatch}){
         }
     
     }
-    console.log(post)
-    function deleteComment(comm){
+      function deleteComment(comm){
         dispatch({type:"DELETECOMMENT",payload:comm});
         axios.put("/api/posts/deletecomment",comm)
         setCommentToggle(false);
 
     }
-    const [likeTrigger,setLikeTrigger]=useState(false);
+
     function like(postid){
         let a=post.likes.find(id=>id===user.user._id);
         if(!a){
@@ -60,15 +61,18 @@ export default function Post({post,user,dispatch}){
         }
 
     }
-    const [commentToggle,setCommentToggle]=useState(false)
-    const commentsStyle=useSpring(commentToggle ? {display:"block"}:{display:"none"});
 
 
-    let updatedPosts=useSelector(store=>store.posts);
+    let postUser=JSON.parse(post.user)
+ 
+
     let singlePost=updatedPosts.find(photo=>photo._id===post._id);
 
+
+    const userPhoto=JSON.parse(post.user);
+
     return <div className="post">
-        
+
        <animated.div className="all-comments" style={commentsStyle}>
             <IoMdClose size="32px" color="red" onClick={()=>setCommentToggle(false)}/>
            
@@ -83,7 +87,7 @@ export default function Post({post,user,dispatch}){
                             
                             <p>: {singleComment.comment}</p>
                         </span>
-                        <IoMdClose onClick={()=>deleteComment(singleComment)}/>
+                        {user.user._id===postUser._id || singleComment.user._id===postUser._id ? <IoMdClose onClick={()=>deleteComment(singleComment)}/>:false}
                     </div>
             })}
            
@@ -100,12 +104,13 @@ export default function Post({post,user,dispatch}){
         <div className="image-container">
             <img src={post.photo} alt="profile"/>
         </div>
+        <h5 style={{margin:"0px",textAlign:"left"}}>{post.likes.length} likes</h5>
         <div className="reactions">
             <span>
-                {singlePost.likes.find(like=>like===user.user._id)?<AiOutlineHeart size="28px" onClick={()=>like(post._id)} color="black"/>:
+                {!singlePost.likes.find(like=>like===user.user._id)?<AiOutlineHeart size="28px" onClick={()=>like(post._id)} color="black"/>:
                 <AiOutlineHeart size="28px" onClick={()=>like(post._id)} color="red"/>}
                 <FaRegCommentAlt size="25px" onClick={()=>setCommentToggle(true)}/>
-                <AiOutlineSend size="28px"/>
+              
             </span>
 
         </div>

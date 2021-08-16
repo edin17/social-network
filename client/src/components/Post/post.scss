@@ -1,6 +1,6 @@
 .post{
     width: 400px;
-    height: 500px;
+    height: 530px;
     border-radius: 20px;
     border: 1px solid rgb(226, 226, 226);
     margin: 0 auto;
@@ -130,5 +130,8 @@
         border:none;
         width: 100vw;
         border-top: 1px solid rgb(226, 226, 226);
+        .all-comments{        
+            position: fixed;
+            background-color: white;}
     }
 }
