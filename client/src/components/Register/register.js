@@ -20,7 +20,7 @@ export default function Login(){
         e.preventDefault();
         if(loginForm.password===loginForm.confirmPassword){
 
-            axios.post("/api/users/register",{
+            axios.post("https://social-network-edin.herokuapp.com/api/users/register",{
                 name:loginForm.name,
                 surname:loginForm.surname,
                 username:loginForm.username,

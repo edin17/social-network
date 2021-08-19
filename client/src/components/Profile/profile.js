@@ -18,7 +18,7 @@ export default function Profile(props){
     const[user,setUser]=useState();
     useEffect(()=>{
         let id=props.match.params.id;
-        axios.post("/api/users/getprofile",{
+        axios.post("https://social-network-edin.herokuapp.com/api/users/getprofile",{
             userid:id
         })
         .then(res=>{
@@ -42,7 +42,7 @@ export default function Profile(props){
                 
         setUser({...user,following:user.following});
         console.log(user.following)
-        axios.post("/api/users/follow",{
+        axios.post("https://social-network-edin.herokuapp.com/api/users/follow",{
             followedID:id,
             followerID:token.user._id
         })
@@ -58,7 +58,7 @@ export default function Profile(props){
     function unfollow(id){
         let update=user.following.filter(flw=>flw!==id)
         setUser({...user,following:update});
-        axios.post("/api/users/unfollow",{
+        axios.post("https://social-network-edin.herokuapp.com/api/users/unfollow",{
             unfollowedID:id,
             unfollowerID:token.user._id
         })

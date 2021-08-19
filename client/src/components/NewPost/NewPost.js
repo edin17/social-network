@@ -35,16 +35,22 @@ export default function NewPost(){
             
     const formdata=new FormData();
 
+
     function uploadPhotoInfo(e){
         if(file===undefined){
             setAlert("Please select 1 picture");
             return false;
         }
         formdata.append("file",file);
-        formdata.append("photo","/uploads/"+file.name);
-        formdata.append("user",JSON.stringify(user));
-        formdata.append("description",description);
-        axios.post("/api/posts/uploadpost",formdata)
+        formdata.append("upload_preset","ml_default")
+        axios.post("https://api.cloudinary.com/v1_1/dyp902luw/image/upload",formdata).then(res=>{
+            console.log(res.data)
+        });
+        axios.post("https://social-network-edin.herokuapp.com/api/posts/uploadpost",{
+            photo:"https://res.cloudinary.com/dyp902luw/image/upload/v1629370172/"+file.name,
+            user:JSON.stringify(user),
+            description:description
+        })
         .then(res=>{
             if(res.data==="Uploaded"){
                 window.location="/home";

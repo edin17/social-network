@@ -9,7 +9,7 @@ export default function Notifications(){
     let token=JSON.parse(localStorage.getItem("token"));
     let [notifications,setNotifications]=useState();
     useEffect(()=>{
-        axios.post("/api/users/getnotifications",{
+        axios.post("https://social-network-edin.herokuapp.com/api/users/getnotifications",{
             userid:token.user._id
         })
         .then(res=>{

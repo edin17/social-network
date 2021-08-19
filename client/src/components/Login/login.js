@@ -13,7 +13,7 @@ export default function Login(){
 
     function login(e){
         e.preventDefault();
-        axios.post("/api/users/login",{
+        axios.post("https://social-network-edin.herokuapp.com/api/users/login",{
             username:loginForm.username,
             password:loginForm.password
         })

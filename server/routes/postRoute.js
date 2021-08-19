@@ -2,7 +2,6 @@ const express=require("express");
 const post=express();
 const Post=require("../models/Post");
 const User=require("../models/User");
-const multer=require("multer");
 
 
 async function sendNotification(postFound,userid,action){
@@ -23,31 +22,16 @@ async function sendNotification(postFound,userid,action){
 }
 
 
-var storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-      cb(null, "C:/Users/PC/OneDrive/Desktop/React/social-network/client/public/uploads")
-    },
-    filename: function (req, file, cb) {
-      cb(null, file.originalname)
-    }
-  })
 
-
-   
-  var upload = multer({ storage: storage ,    limits: { fileSize: 20000000},
-    fileFilter:(req,file,cb) =>{
-        if (file.mimetype !== 'image/png' && file.mimetype !== 'image/jpg' && file.mimetype !== 'image/jpeg') {
-            req.file_error = "file not allowed";
-            return cb(null,false);
-        }
-        cb(null, true);}})
   
 
 
 
-post.post("/uploadpost",upload.single("file"),async(req,res)=>{
-    const fileInfo=req.body;
+post.post("/uploadpost",async(req,res)=>{
 
+    const fileInfo=req.body;
+    console.log(fileInfo)
+    
     let user=JSON.parse(fileInfo.user);
     let userDB=await User.findOne({_id:user._id});
     userDB.posts.push(fileInfo);
@@ -59,7 +43,7 @@ post.post("/uploadpost",upload.single("file"),async(req,res)=>{
         newPost.save();
         res.send("Uploaded")
     }catch(err){
-        post.status(400).send("Invalid file upload.");
+        res.status(400).send("Invalid file upload.");
     }
 });
 

@@ -11,7 +11,7 @@ export default function Home(){
     const dispatch=useDispatch();
 
     function getPosts(){
-        axios.post("/api/posts/getposts",{
+        axios.post("https://social-network-edin.herokuapp.com/api/posts/getposts",{
             user:localUserInfo.user
         })
         .then(res=>{

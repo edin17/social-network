@@ -13,7 +13,7 @@ export default function Header(){
     let dispatch=useDispatch();
     function searching(e){
         setSearch(e.target.value);
-        axios.post("/api/users/search",{
+        axios.post("https://social-network-edin.herokuapp.com/api/users/search",{
             searched:search
         })
         .then(res=>{

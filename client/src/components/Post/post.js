@@ -36,7 +36,7 @@ export default function Post({post,user,dispatch}){
     }
       function deleteComment(comm){
         dispatch({type:"DELETECOMMENT",payload:comm});
-        axios.put("/api/posts/deletecomment",comm)
+        axios.put("https://social-network-edin.herokuapp.com/api/posts/deletecomment",comm)
         setCommentToggle(false);
 
     }
@@ -44,14 +44,14 @@ export default function Post({post,user,dispatch}){
     function like(postid){
         let a=post.likes.find(id=>id===user.user._id);
         if(!a){
-            axios.put("/api/posts/like",{
+            axios.put("https://social-network-edin.herokuapp.com/api/posts/like",{
                 postid:postid,
                 userid:user.user._id
             })
             dispatch({type:"LIKE",payload:{userid:user.user._id,postid:postid}});
             setLikeTrigger(!likeTrigger)
         }else{
-            axios.put("/api/posts/unlike",{
+            axios.put("https://social-network-edin.herokuapp.com/api/posts/unlike",{
                 postid:postid,
                 userid:user.user._id
             })

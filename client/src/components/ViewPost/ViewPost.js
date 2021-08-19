@@ -22,14 +22,14 @@ export default function ViewPost(props){
 
 
     useEffect(()=>{
-        axios.post("/api/users/getprofile",{
+        axios.post("https://social-network-edin.herokuapp.com/api/users/getprofile",{
             userid:token.user._id
         })
         .then(res=>{
             setUser(res.data);
         })
 
-        axios.post("/api/posts/getpost",{
+        axios.post("https://social-network-edin.herokuapp.com/api/posts/getpost",{
             postid:props.match.params.id
         })
         .then(res=>{
@@ -51,7 +51,7 @@ export default function ViewPost(props){
             }
             
             post.comments.push(commObj);
-            axios.put("/api/posts/postcomment",commObj);
+            axios.put("https://social-network-edin.herokuapp.com/api/posts/postcomment",commObj);
 
             setComment("");
         }
@@ -59,7 +59,7 @@ export default function ViewPost(props){
     }
       function deleteComment(comm){
         setPost({...post,likes:post.comments.filter(commObj=>commObj!==comm)})
-        axios.put("/api/posts/deletecomment",comm)
+        axios.put("https://social-network-edin.herokuapp.com/api/posts/deletecomment",comm)
         setCommentToggle(false);
 
     }
@@ -67,7 +67,7 @@ export default function ViewPost(props){
     function like(postid){
         let a=post.likes.find(id=>id===user._id);
         if(!a){
-            axios.put("/api/posts/like",{
+            axios.put("https://social-network-edin.herokuapp.com/api/posts/like",{
                 postid:postid,
                 userid:user._id
             })
@@ -75,7 +75,7 @@ export default function ViewPost(props){
    
             setLikeTrigger(!likeTrigger)
         }else{
-            axios.put("/api/posts/unlike",{
+            axios.put("https://social-network-edin.herokuapp.com/api/posts/unlike",{
                 postid:postid,
                 userid:user._id
             })
@@ -90,7 +90,7 @@ export default function ViewPost(props){
     const userPhoto=JSON.parse(post.user);
 
     function deletePost(){
-        axios.put("/api/posts/deletepost",{
+        axios.put("https://social-network-edin.herokuapp.com/api/posts/deletepost",{
             postid:props.match.params.id
         })
         
