@@ -12,12 +12,13 @@ mongoose.connect(process.env.DB_URL,{useUnifiedTopology: true,
 
 
 const app = express();
+
+app.use(express.json());
 app.use(express.urlencoded({
     limit:"50mb",
     extended:true
 }))
 app.use(cors())
-app.use(express.json());
 
 app.use("/api/users",userRoute);
 app.use("/api/posts",postRoute);
