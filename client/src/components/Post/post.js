@@ -104,6 +104,10 @@ export default function Post({post,user,dispatch}){
         <div className="image-container">
             <img src={post.photo} alt="profile"/>
         </div>
+        <div className="description">
+            <h5 onClick={()=>window.location="/profile/"+userPhoto._id}>{userPhoto.username}</h5>
+            <p>{post.description}</p>
+        </div>
         <h5 style={{margin:"0px",textAlign:"left"}}>{post.likes.length} likes</h5>
         <div className="reactions">
             <span>
@@ -121,7 +125,7 @@ export default function Post({post,user,dispatch}){
         <div className="post-comments">
             <div className="single-comment last-comment">
                 <h4>{post.comments.length>0 ? post.comments[post.comments.length-1].user.username:" "}</h4>
-                <p> {post.comments.length>0 ? ": "+post.comments[post.comments.length-1].comment:" "}</p>
+                <p> {post.comments.length>0 ? post.comments[post.comments.length-1].comment:" "}</p>
             </div>
         </div>
         
