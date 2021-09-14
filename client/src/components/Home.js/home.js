@@ -27,11 +27,15 @@ export default function Home(){
     const posts=useSelector(store=>store.posts)
     console.log(posts)
 
-
+    let reversedPosts=[];
+    for(var i=posts.length-1;i>=0;i--){
+        reversedPosts.push(posts[i]);
+    }
+    
     return <div className="home">
         <Header/>
-        {posts.length<=0 ? <p>Please go search and follow someone to see his posts!</p>:""}
-        {posts.map(post=>{
+        {posts.length<=0 ? <p>Please wait ...</p>:""}
+        {reversedPosts.map(post=>{
             return <Post post={post} user={localUserInfo} dispatch={dispatch}/>
         })}
         <Footer/>

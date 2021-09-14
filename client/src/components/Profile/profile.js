@@ -32,7 +32,7 @@ export default function Profile(props){
 // eslint-disable-next-line
     },[props.match.params.id])
     const [settings,setSettings]=useState(false);
-    
+    const [file,setFile]=useState();
     if(!user){
         return <div>Loading</div>
     }
@@ -72,11 +72,50 @@ export default function Profile(props){
         })
     }
 
+    function openFile(e){
+        setFile(e.target.files[0]);
+        console.log(file)
+       
+    }
+
+    const formdata=new FormData();
+
+    function updateProfilePhoto(){
+        if(file===undefined){
+            console.log("Select one file");
+        }
+
+        formdata.append("file",file);
+        formdata.append("upload_preset","ml_default");
+        axios.post("https://api.cloudinary.com/v1_1/dyp902luw/image/upload",formdata).then(res=>{
+            console.log(res.data)
+        });
+
+        axios.post("https://social-network-edin.herokuapp.com/api/posts/updateprofile",{
+            userid:props.match.params.id,
+            photo:"https://res.cloudinary.com/dyp902luw/image/upload/v1629370172/"+file.name
+        })
+        .then(res=>{
+            if(res.data==="Uploaded"){
+                console.log("uploaded")
+            }else{
+                console.log("Server problem");
+            }
+        })
+    }
+
     function logout(){
         localStorage.removeItem("token");
         window.location="/login";
     }
+   
+    let reversedPosts=[];
 
+    for(var i=user.posts.length-1;i>=0;i--){
+        reversedPosts.push(user.posts[i]);
+    }
+    
+    
     let settingsStyle=settings ? {display:"block"}:{display:"none"};
     return <div className="profile">
         <Header/>
@@ -114,10 +153,12 @@ export default function Profile(props){
         </div>
         <div id="settings" style={settingsStyle} >
                 <h4 onClick={()=>logout()}>Logout</h4>
+                <input type="file" onChange={(e)=>openFile(e)}/>
+                <h4 onClick={()=>updateProfilePhoto()}>UPLOAD</h4>
         </div>
         <div className="image-container">
             
-            {user.posts.map(photo=>{
+            {reversedPosts.map(photo=>{
                 
                 return <img src={photo.photo} alt="post" onClick={()=>window.location="/post/"+photo._id}/>
             })}

@@ -28,11 +28,7 @@ export default function Login(){
                 password:loginForm.password
             })
             .then(res=>{
-                if(res.data==="Success"){
-                    window.location="/login";
-                }else{
-                    setAlert("Invalid username or password.");
-                }
+                window.location="/login";
             })
         }else{
             setAlert("Password and conformation password are not same.");

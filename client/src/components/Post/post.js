@@ -28,7 +28,7 @@ export default function Post({post,user,dispatch}){
             }
             
             dispatch({type:"ADDCOMMENT",payload:commObj});
-            axios.put("/api/posts/postcomment",commObj);
+            axios.put("https://social-network-edin.herokuapp.com/api/posts/postcomment",commObj);
 
             setComment("");
         }
@@ -70,12 +70,12 @@ export default function Post({post,user,dispatch}){
 
 
     const userPhoto=JSON.parse(post.user);
-
+    console.log(userPhoto)
     return <div className="post">
 
        <animated.div className="all-comments" style={commentsStyle}>
             <IoMdClose size="32px" color="red" onClick={()=>setCommentToggle(false)}/>
-           
+            {post.comments.length===0 && <p>This post have not comments.</p>}
             {post.comments.map(singleComment=>{
                  
             return  <div className="single-comment">

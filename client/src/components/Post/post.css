@@ -72,7 +72,7 @@
 
 .post .image-container {
   width: 100%;
-  background-color: gray;
+  background-color: #e6e6e6;
 }
 
 .post .image-container img {
@@ -208,6 +208,7 @@
 .post .all-comments {
   height: 100%;
   z-index: 4;
+  background-color: white;
 }
 
 @media (max-width: 478px) {
@@ -217,8 +218,10 @@
     border-top: 1px solid #e2e2e2;
   }
   .post .all-comments {
-    position: fixed;
+    position: absolute;
+    height: 70%;
     background-color: white;
+    overflow-y: scroll;
   }
 }
 /*# sourceMappingURL=post.css.map */

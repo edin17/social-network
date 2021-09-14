@@ -21,12 +21,6 @@ async function sendNotification(postFound,userid,action){
 }
 }
 
-
-
-  
-
-
-
 post.post("/uploadpost",async(req,res)=>{
 
     const fileInfo=req.body;
@@ -127,6 +121,19 @@ post.post("/getpost",async(req,res)=>{
   }
 })
 
+post.post("/updateprofile",async(req,res)=>{
+  let updateInfo=req.body;
+  
+  let userFound=await User.findOne({_id:updateInfo.userid});
+
+  if(userFound){
+    userFound.profilePhoto=updateInfo.photo;
+    userFound.save();
+    res.status(200).send("Uploaded");
+  }else{
+    res.send("Server problem.");
+  }
+})
 
 
 

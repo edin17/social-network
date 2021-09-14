@@ -28,7 +28,7 @@ user.post("/login",async(req,res)=>{
         if(await bcrypt.compare(userInfo.password,userFound.password)){
             
             const token=jwt.sign({userData:userFound},process.env.SECRET_TOKEN);
-            res.header("auth-token",token).send({token:token,user:userFound}); 
+            res.send({token:token,user:userFound}); 
 
         }else{
             res.status(401).send("Invalid username or password.");
