@@ -23,7 +23,7 @@ user.post("/register",async(req,res)=>{
 
 user.post("/login",async(req,res)=>{
     const userInfo=req.body;
-    const userFound=await User.findOne({username:userInfo.username})
+    const userFound=await User.findOne({username:userInfo.username},{"posts":0,"notifications":0,"followers":0,"following":0})
     if(userFound){
         if(await bcrypt.compare(userInfo.password,userFound.password)){
             
@@ -41,7 +41,7 @@ user.post("/login",async(req,res)=>{
 user.post("/getprofile",async(req,res)=>{
     let userid=req.body.userid;
     
-    let user=await User.findOne({_id:userid});
+    let user=await User.findOne({_id:userid},{"notifications":0,"posts":0});
     if(user){
         let userPosts=await Post.find();
         let editedPosts=[];
@@ -91,7 +91,9 @@ user.post("/unfollow",async(req,res)=>{
 user.post("/search",async(req,res)=>{
     const searched=req.body.searched;
 
-    const users=await User.find({username:{$regex:searched}}).limit(100);
+    const users=await User.find({username:{$regex:searched}},{"username":1,"profilePhoto":1}).limit(100)
+    
+    console.log(users);
     res.send(users);
 })
 user.post("/getnotifications",async(req,res)=>{

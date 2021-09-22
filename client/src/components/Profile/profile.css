@@ -103,11 +103,12 @@
 
 #settings {
   position: absolute;
-  width: 100px;
-  height: 100px;
+  width: 180px;
+  height: 180px;
   border: 1px solid #dfdddd;
-  left: 50vw;
+  left: 45vw;
   text-align: center;
+  background-color: white;
 }
 
 #settings h4 {

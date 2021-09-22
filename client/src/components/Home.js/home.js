@@ -1,27 +1,55 @@
 import { useSelector , useDispatch } from "react-redux";
 import Header from "../Header/header";
 import Footer from "../Footer/footer";
-import { useEffect } from "react";
+import { useEffect,useState } from "react";
 import axios from "axios";
 import Post from "../Post/post";
 import "./home.css";
 
 export default function Home(){
-    const localUserInfo=JSON.parse(localStorage.getItem("token"))
+    
     const dispatch=useDispatch();
-
-    function getPosts(){
-        axios.post("https://social-network-edin.herokuapp.com/api/posts/getposts",{
-            user:localUserInfo.user
+    let [alert,setAlert]=useState("Please wait...")
+    let token=JSON.parse(localStorage.getItem("token"));
+    const[user,setUser]=useState();
+    useEffect(()=>{
+        let id=token.user._id;
+        axios.post("https://social-network-edin.herokuapp.com/api/users/getprofile",{
+            userid:id,
         })
         .then(res=>{
-           dispatch({type:"LOAD",payload:res.data});
+            
+            if(typeof(res.data)==="object"){
+                setUser(res.data);
+                
+            }else{
+                console.log("User not found.");
+            }
         })
+
+    },[token.user._id]) 
+
+    function getPosts(){
+        if(user!==undefined){
+            axios.post("https://social-network-edin.herokuapp.com/api/posts/getposts",{
+                user:user
+            })
+            .then(res=>{
+                res.data.map(single=>{
+                    single.user=JSON.stringify(single.user)
+                })
+                if(res.data.length<=0){
+                    setAlert("You have not any posts to see right now.")
+                }
+                dispatch({type:"LOAD",payload:res.data});
+            })
+        }
+
     }
     useEffect(()=>{
         getPosts();
         // eslint-disable-next-line 
-    },[])
+    },[user])
     
 
     const posts=useSelector(store=>store.posts)
@@ -33,10 +61,10 @@ export default function Home(){
     }
     
     return <div className="home">
-        <Header/>
-        {posts.length<=0 ? <p>Please wait ...</p>:""}
+        <Header setUser={setUser} user={user}/>
+        {posts.length<=0 ? <p>{alert}</p>:""}
         {reversedPosts.map(post=>{
-            return <Post post={post} user={localUserInfo} dispatch={dispatch}/>
+            return <Post post={post} user={token} dispatch={dispatch}/>
         })}
         <Footer/>
     </div>

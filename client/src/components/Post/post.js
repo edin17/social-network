@@ -28,7 +28,7 @@ export default function Post({post,user,dispatch}){
             }
             
             dispatch({type:"ADDCOMMENT",payload:commObj});
-            axios.put("https://social-network-edin.herokuapp.com/api/posts/postcomment",commObj);
+            axios.put("http://localhost:5000/api/posts/postcomment",commObj);
 
             setComment("");
         }
@@ -62,8 +62,9 @@ export default function Post({post,user,dispatch}){
 
     }
 
-
+    
     let postUser=JSON.parse(post.user)
+    
  
 
     let singlePost=updatedPosts.find(photo=>photo._id===post._id);

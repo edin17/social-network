@@ -4,6 +4,7 @@ const userRoute=require("./routes/userRoute");
 const postRoute=require("./routes/postRoute");
 const cors=require("cors")
 require("dotenv").config();
+const compression=require("compression");
 
 
 mongoose.connect(process.env.DB_URL,{useUnifiedTopology: true,
@@ -13,7 +14,7 @@ mongoose.connect(process.env.DB_URL,{useUnifiedTopology: true,
 
 const app = express();
 
-
+app.use(compression())
 app.use(express.json({limit:"50mb"}));
 app.use(cors(
     {

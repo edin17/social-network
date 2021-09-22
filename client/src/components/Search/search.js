@@ -4,24 +4,10 @@ import axios from "axios";
 import "./search.css";
 import {useSelector} from "react-redux";
 
-export default function Search({setSearchToggle}){
+export default function Search({setSearchToggle,user,setUser}){
     let token=JSON.parse(localStorage.getItem("token"));
-    const[user,setUser]=useState();
-    useEffect(()=>{
-        let id=token.user._id;
-        axios.post("https://social-network-edin.herokuapp.com/api/users/getprofile",{
-            userid:id
-        })
-        .then(res=>{
-            if(typeof(res.data)==="object"){
-                setUser(res.data);
-                
-            }else{
-                console.log("User not found.");
-            }
-        })
 
-    },[token.user._id]) 
+
     let users=useSelector(store=>store.search);
 
     function follow(id){

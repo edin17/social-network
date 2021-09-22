@@ -5,6 +5,7 @@ export default function postReducer(state=[],action){
             state=action.payload;
             return state;
         case "LOAD":
+            console.log(action.payload)
             state=action.payload;
             return state;
         case "ADDCOMMENT":

@@ -55,11 +55,17 @@ post.post("/getposts",async(req,res)=>{
   const allPosts=await Post.find();
   var filteredPosts;
 
-  user.following.map(id=>{
-    filteredPosts=allPosts.filter(post=>post.userid===id);
-  })
+  if(user.following.length<=0){
+    filteredPosts=user.posts;
+  }else{
+    user.following.map(id=>{
+      filteredPosts=allPosts.filter(post=>post.userid!==id);
+    })
+  }
+ 
 
-  res.send(allPosts);
+  
+  res.send(filteredPosts);
 
 })
 
@@ -70,8 +76,9 @@ post.put("/postcomment",async(req,res)=>{
     if(postFound){
       postFound.comments.push(comment);
       postFound.save();
-      let action="comment on your photo"
-      sendNotification(postFound,comment.userid,action)
+      let action="commented your photo"
+      
+      sendNotification(postFound,comment.user._id,action)
     }else{
       console.log("Post does not exist.")
     }

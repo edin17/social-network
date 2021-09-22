@@ -24,7 +24,7 @@ export default function Profile(props){
         .then(res=>{
             if(typeof(res.data)==="object"){
                 setUser(res.data);
-                dispatch({type:"LOAD",payload:token.user.posts})
+                dispatch({type:"LOAD",payload:res.data.posts})
             }else{
                 console.log("User not found.");
             }

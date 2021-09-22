@@ -21,17 +21,21 @@ export default function Notifications(){
     if(!notifications){
         return <div>Loading...</div>
     }
+    let reversedNotifications=[]
+    for(var i=notifications.length-1;i>=0;i--){
+        reversedNotifications.push(notifications[i]);
+    }
     return <div className="notifications">
         <Header/>
         <h1>Notifications</h1>
-        {notifications.length<=0?<p>You have not notifications</p>:notifications.map(notification=>{
+        {notifications.length<=0?<p>You have not notifications</p>:reversedNotifications.map(notification=>{
             return  <div className="single-notification">
             <span onClick={()=>window.location="/profile/"+notification.likeUser._id}>
                 <img src={notification.likeUser.profilePhoto} id="profile" alt="profile"/>
                 <h4>{notification.likeUser.username}</h4>
             </span>
 
-            <p>liked your photo</p>
+            <p>{notification.action}</p>
 
             <img src={notification.post.photo} id="post" alt="post"/>
 
